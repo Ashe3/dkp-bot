@@ -10,12 +10,19 @@ bot.start(async (ctx) => {
 
   try {
     const res = await api.get(`/users/${telegramId}`);
-    if (res.data) return ctx.reply("You are already registered.");
-  } catch (error) {
-    return ctx.reply("Something went wrong. Please try again later.");
-  }
 
-  ctx.reply("Welcome! Please register by sending your nickname.");
+    if (res.data?.username) {
+      return ctx.reply(`Hello ${res.data.username}, welcome back!`);
+    }
+
+    return ctx.reply("Please send your nickname for register.");
+  } catch (error: any) {
+    if (error.response?.status === 404) {
+      return ctx.reply("Please send your nickname for register.");
+    }
+
+    ctx.reply("Welcome! Please register by sending your nickname.");
+  }
 });
 
 // on text message
@@ -34,7 +41,9 @@ bot.on(message("text"), async (ctx, next) => {
       telegramId,
       username,
     });
-    ctx.reply("You have been registered successfully.");
+    ctx.reply(
+      "You have been registered successfully. Type /help to see available commands."
+    );
   } catch (error) {
     ctx.reply("Unable to register. Please try again later.");
   }
