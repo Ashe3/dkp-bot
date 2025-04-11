@@ -73,6 +73,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/axios@npm:^0.14.4":
+  version: 0.14.4
+  resolution: "@types/axios@npm:0.14.4"
+  dependencies:
+    axios: "npm:*"
+  checksum: 10c0/945ef9d9d493b7292d33cf55679af90ffb60fe85475ce79327494480d517e8263f3f0c2f262396a1ada3ef4d66f3b05ea16b1f3c40680aa2b8399c36f6a92dfa
+  languageName: node
+  linkType: hard
+
+"@types/dotenv@npm:^8.2.3":
+  version: 8.2.3
+  resolution: "@types/dotenv@npm:8.2.3"
+  dependencies:
+    dotenv: "npm:*"
+  checksum: 10c0/af9178da617959cddc8259aaa3f16c474523ead469f4a03490de2f2d1cafc8615c5d0d1ed3fad837096218126421c38cd46b4065548bb5aee3cc002c518b69f7
+  languageName: node
+  linkType: hard
+
 "@types/node@npm:^22.14.0":
   version: 22.14.0
   resolution: "@types/node@npm:22.14.0"
@@ -123,7 +141,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.8.4":
+"axios@npm:*, axios@npm:^1.8.4":
   version: 1.8.4
   resolution: "axios@npm:1.8.4"
   dependencies:
@@ -214,6 +232,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "dkp-bot@workspace:."
   dependencies:
+    "@types/axios": "npm:^0.14.4"
+    "@types/dotenv": "npm:^8.2.3"
     "@types/node": "npm:^22.14.0"
     axios: "npm:^1.8.4"
     dotenv: "npm:^16.5.0"
@@ -223,7 +243,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"dotenv@npm:^16.5.0":
+"dotenv@npm:*, dotenv@npm:^16.5.0":
   version: 16.5.0
   resolution: "dotenv@npm:16.5.0"
   checksum: 10c0/5bc94c919fbd955bf0ba44d33922a1e93d1078e64a1db5c30faeded1d996e7a83c55332cb8ea4fae5a9ca4d0be44cbceb95c5811e70f9f095298df09d1997dd9
