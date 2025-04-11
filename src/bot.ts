@@ -19,9 +19,11 @@ bot.start(async (ctx) => {
 });
 
 // on text message
-bot.on(message("text"), async (ctx) => {
+bot.on(message("text"), async (ctx, next) => {
   const telegramId = ctx.from.id;
   const username = ctx.message.text.trim();
+
+  if (username.startsWith("/")) return next();
 
   if (username.length < 3) {
     return ctx.reply("Username must be at least 3 characters long.");
@@ -60,8 +62,8 @@ bot.command("dkp", async (ctx) => {
 
   try {
     const res = await api.get(`/users/${telegramId}`);
-    const { dkp, multiplier } = res.data;
-    ctx.reply(`Your DKP: ${dkp}\nMultiplier: ${multiplier}`);
+    const { dkp, multiplier, username } = res.data;
+    ctx.reply(`${username}\nYour DKP: ${dkp}\nMultiplier: ${multiplier}`);
   } catch {
     ctx.reply("Unable to fetch DKP. Please try again later.");
   }
