@@ -6,12 +6,20 @@ dotenv.config();
 
 import { bot } from "./bot";
 const app = express();
-app.use(bot.webhookCallback("/webhook"));
 
-bot.telegram
-  .setWebhook(`${process.env.WEBHOOK_URL}/webhook`)
-  .then(() => console.log("✅ Webhook set"))
-  .catch((err) => console.error("❌ Failed to set webhook", err));
+const isDev = process.env.NODE_ENV === "development";
+
+if (isDev) {
+  bot.launch();
+  console.log("🤖 Bot launched in polling mode (development)");
+} else {
+  app.use(bot.webhookCallback("/webhook"));
+
+  bot.telegram
+    .setWebhook(`${process.env.WEBHOOK_URL}/webhook`)
+    .then(() => console.log("✅ Webhook set"))
+    .catch((err) => console.error("❌ Failed to set webhook", err));
+}
 
 app.get("/", (_, res) => {
   res.send("Telegram bot (Webhook mode) is active");

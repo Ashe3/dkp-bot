@@ -90,7 +90,14 @@ bot.command("claim", async (ctx) => {
       code,
     });
     ctx.reply(`Claimed code: ${res.data.code}\nAmount: ${res.data.amount}`);
-  } catch {
+  } catch (error: any) {
+    if (
+      error.response?.data?.error &&
+      (error.response?.status === 400 || error.response?.status === 404)
+    ) {
+      return ctx.reply(`${error.response.data.error}`);
+    }
+
     ctx.reply("Unable to claim code. Please try again later.");
   }
 });
@@ -99,7 +106,7 @@ bot.command("claim", async (ctx) => {
 bot.command("history", async (ctx) => {
   const telegramId = ctx.from.id;
   try {
-    const res = await api.get(`/users/${telegramId}/history`);
+    const res = await api.get(`/users/${telegramId}/history/10`);
     const msg =
       res.data
         .map(
