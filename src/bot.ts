@@ -72,7 +72,9 @@ bot.command("dkp", async (ctx) => {
   try {
     const res = await api.get(`/users/${telegramId}`);
     const { dkp, multiplier, username } = res.data;
-    ctx.reply(`${username}\nYour DKP: ${dkp}\nMultiplier: ${multiplier}`);
+    ctx.reply(
+      `${username}\nYour DKP: ${dkp.toFixed(2)}\nMultiplier: ${multiplier}`
+    );
   } catch {
     ctx.reply("Unable to fetch DKP. Please try again later.");
   }
