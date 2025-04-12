@@ -111,7 +111,7 @@ bot.command("history", async (ctx) => {
       res.data
         .map(
           (e: any) =>
-            `${e.amount >= 0 ? "+" : ""}${e.amount} DKP — ${e.event.title}`
+            `${e.amount >= 0 ? "+" : ""}${e.amount} DKP — ${e.description}`
         )
         .join("\n") || "No history found.";
     ctx.reply(msg);
